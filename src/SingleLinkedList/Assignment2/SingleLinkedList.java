@@ -34,7 +34,16 @@ public class SingleLinkedList
     Node head;      // First element in the list.
     Node tail;      // Last element in the list.
     
-    // Create a method for adding a new node to the list.
+    private void push(String val)
+    {
+        
+    }
+    
+    /**
+     * The add method is used for adding a new node to the end
+     * of a single linked list.
+     * @param val The value to be contained in the new node.
+     */
     private void add(String val)
     {
         // Create the new node.
@@ -43,10 +52,15 @@ public class SingleLinkedList
         // If the list is empty, set the new node to the head and the tail.
         if (head == null)
         {
-            
+            head = n;   // No existing elements so new node becomes the head.
+            tail = n;   // No existing elements so new node becomes the tail.
         }
-        
-        
+        // Else, there are already elements so add to the end.
+        else
+        {
+            tail.next = n;  // Set the current tail to point to the new node.
+            tail = n;       // Reassign the tail reference variable to n.
+        }    
     }
     
     
