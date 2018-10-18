@@ -82,6 +82,18 @@ public class SingleLinkedList
         }    
     }
     
+    private void display()
+    {
+        // Create a temporary node to use as a pointer and set it to head.
+        Node pointer = head;
+        
+        // Cycle through all of the nodes and display the contents.
+        while (pointer != null)
+        {
+            System.out.print(pointer.value + " ");
+            pointer = pointer.next;
+        }
+    }
     
     
     /**
