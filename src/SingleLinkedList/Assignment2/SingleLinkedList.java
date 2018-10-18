@@ -1,5 +1,5 @@
 /*
- * Create two methods, inser and delete, that allows
+ * Create two methods, insert and delete, that allows
  * a new node to be inserted or deleted from any location 
  * in the linked list.
  */
@@ -34,6 +34,13 @@ public class SingleLinkedList
     Node head;      // First element in the list.
     Node tail;      // Last element in the list.
     
+    /**
+     * The insert method will search for an element value that 
+     * matches the value passed in as after. The argument passed
+     * in as val will then be written into a node following after.
+     * @param val The new value to be written into the new node.
+     * @param after The value in the list after which the new node is placed.
+     */
     private void insert(String val, String after)
     {
         // Create  a temporary Node for keeping place in the list.
@@ -57,10 +64,46 @@ public class SingleLinkedList
                 {
                     n.next = pointer.next;
                     pointer.next = n;
+                    if (pointer == tail)
+                        tail = n;
                 }
                 pointer = pointer.next; // Advance the pointer.
             }
+        }
+    }
         
+    /**
+     * The delete method will search the list for the node value
+     * provided and will delete that node if found.
+     * @param element The node value to find.
+     */
+    private void delete(String element)
+    {
+        // Create temporary nodes to cycle through the list.
+        Node pointer = head;  // The pointer will cycle through list.
+        Node previous = head; // After head, the previous will follow pointer.
+        
+        // Check to see if the value to delete is contained in the head.
+        if (head.value.equals(element))
+        {
+            head = head.next;
+        }
+        // Else, if the value is in the list, it is past the head.
+        else
+        {
+            pointer = head.next;  // Advance the pointer since head was checked.
+            while (pointer != null)
+            {
+                if (pointer.value.equals(element))
+                {
+                    previous.next = pointer.next;
+                    if (previous.next == null)
+                        tail = previous;
+                }
+                else
+                    pointer = pointer.next;
+            }
+        }
     }
     
     /**
