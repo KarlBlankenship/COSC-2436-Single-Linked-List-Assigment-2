@@ -34,6 +34,35 @@ public class SingleLinkedList
     Node head;      // First element in the list.
     Node tail;      // Last element in the list.
     
+    private void insert(String val, String after)
+    {
+        // Create  a temporary Node for keeping place in the list.
+        Node pointer = head;    // Will cycle through the list.
+        
+        // Create the new Node.
+        Node n = new Node(val);
+        
+        //Check to see if head matches the 
+        if (head.value.equals(after))
+        {
+            n.next = head.next;
+            head.next = n;
+        }
+        else
+        {
+            pointer = head.next;    // Move pointer to first element after head.
+            while (pointer != null)
+            {
+                if (pointer.value.equals(after))
+                {
+                    n.next = pointer.next;
+                    pointer.next = n;
+                }
+                pointer = pointer.next; // Advance the pointer.
+            }
+        
+    }
+    
     /**
      * The push method will create a new node and will push the
      * node into the front of the list.
