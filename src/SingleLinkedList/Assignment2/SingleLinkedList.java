@@ -30,7 +30,7 @@ public class SingleLinkedList
         }
     }
     
-    // Create variable to hold the head and the tail of the list.
+    // Create variables to hold the head and the tail of the list.
     Node head;      // First element in the list.
     Node tail;      // Last element in the list.
     
@@ -62,10 +62,16 @@ public class SingleLinkedList
             {
                 if (pointer.value.equals(after))
                 {
-                    n.next = pointer.next;
-                    pointer.next = n;
                     if (pointer == tail)
+                    {
+                        pointer.next = n;
                         tail = n;
+                    }
+                    else
+                    {
+                        n.next = pointer.next;
+                        pointer.next = n;
+                    }
                 }
                 pointer = pointer.next; // Advance the pointer.
             }
@@ -75,16 +81,16 @@ public class SingleLinkedList
     /**
      * The delete method will search the list for the node value
      * provided and will delete that node if found.
-     * @param element The node value to find.
+     * @param val The node value to find.
      */
-    private void delete(String element)
+    private void delete(String val)
     {
         // Create temporary nodes to cycle through the list.
         Node pointer = head;  // The pointer will cycle through list.
         Node previous = head; // After head, the previous will follow pointer.
         
         // Check to see if the value to delete is contained in the head.
-        if (head.value.equals(element))
+        if (head.value.equals(val))
         {
             head = head.next;
         }
@@ -94,14 +100,14 @@ public class SingleLinkedList
             pointer = head.next;  // Advance the pointer since head was checked.
             while (pointer != null)
             {
-                if (pointer.value.equals(element))
+                if (pointer.value.equals(val))
                 {
                     previous.next = pointer.next;
                     if (previous.next == null)
                         tail = previous;
                 }
-                else
-                    pointer = pointer.next;
+                previous = pointer;
+                pointer = pointer.next;
             }
         }
     }
@@ -167,12 +173,73 @@ public class SingleLinkedList
         }
     }
     
-    
     /**
+     * The main method will test the Node class and the SingleLinkedList
+     * methods.
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {
+        // Create a new SingleLinkedList object.
+        SingleLinkedList sll = new SingleLinkedList();
+        
+        // Add some elements using add and push methods just to establish
+        // a base list.
+        sll.add("c");
+        sll.add("d");
+        sll.push("b");
+        sll.push("a");
+        System.out.print("The base list: ");
+        sll.display();
+        System.out.print(" Head should be a: " + sll.head.value);
+        System.out.println(" Tail should be d: " + sll.tail.value);
+        
+        //Use insert method to add e after d.
+        sll.insert("e", "d");
+        System.out.print("Insert e after d: ");
+        System.out.print("The new list: ");
+        sll.display();
+        System.out.print(" Head should be a: " + sll.head.value);
+        System.out.println(" Tail should be e: " + sll.tail.value);
+        
+        //Use insert method to insert x after a.
+        sll.insert("x", "a");
+        System.out.print("Insert x after a: ");
+        System.out.print("The new list: ");
+        sll.display();
+        System.out.print(" Head should be a: " + sll.head.value);
+        System.out.println(" Tail should be e: " + sll.tail.value);
+        
+        //Use insert method to insert y after d.
+        sll.insert("y", "d");
+        System.out.print("Insert y after d: ");
+        System.out.print("The new list: ");
+        sll.display();
+        System.out.print(" Head should be a: " + sll.head.value);
+        System.out.println(" Tail should be e: " + sll.tail.value);
+        
+        // Use the delete method to delete the first element a.
+        sll.delete("a");
+        System.out.print("Delete a: ");
+        System.out.print("The new list: ");
+        sll.display();
+        System.out.print(" Head should be x: " + sll.head.value);
+        System.out.println(" Tail should be e: " + sll.tail.value);
+
+        // Use the delete method to delete the element c.
+        sll.delete("c");
+        System.out.print("Delete c: ");
+        System.out.print("The new list: ");
+        sll.display();
+        System.out.print(" Head should be x: " + sll.head.value);
+        System.out.println(" Tail should be e: " + sll.tail.value);
+        
+        // Use the delete method to delete the last element e.
+        sll.delete("e");
+        System.out.print("Delete e: ");
+        System.out.print("The new list: ");
+        sll.display();
+        System.out.print(" Head should be x: " + sll.head.value);
+        System.out.println(" Tail should be y: " + sll.tail.value);  
     }
-    
 }
