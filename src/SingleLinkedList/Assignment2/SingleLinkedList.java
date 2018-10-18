@@ -34,9 +34,28 @@ public class SingleLinkedList
     Node head;      // First element in the list.
     Node tail;      // Last element in the list.
     
+    /**
+     * The push method will create a new node and will push the
+     * node into the front of the list.
+     * @param val The value to be contained in the new node.
+     */
     private void push(String val)
     {
+        // Create a new node.
+        Node n = new Node(val);
         
+        // If the list is empty, set the new node to the head and the tail.
+        if (head == null)
+        {
+            head = n;   // No existing elements so new node becomes the head.
+            tail = n;   // No existing elements so new node becomes the tail.
+        }
+        // Else, there are already elements so add to the beginning.
+        else
+        {
+            n.next = head;  // Set the new node as the first node in the list.
+            head = n;       // Reassign the head reference to the new node.
+        }    
     }
     
     /**
